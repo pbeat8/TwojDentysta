@@ -4,71 +4,53 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Location</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
+<div class="container">
+    <div class="row">
+        @Html.ActionLink("< Powrót", null, null, null, new { href = Request.UrlReferrer })
+    </div>
+    <br />
+    <div class="row">
+        <h2 class="text-center">
             @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ZipCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Long)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Long)
-        </dd>
-
-    </dl>
+        </h2>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="~/Images/@(Model.ID).jpg" class="img-rounded img-thumbnail" alt="img-thumbnail" />
+        </div>
+        <div class="col-lg-6">
+            <div class="container">
+                <div class="row">
+                    <div class="col"> <i>Miasto</i> </div>
+                </div>
+                <div class="row">
+                    <div class="col"> <h4> @Html.DisplayFor(model => model.City) </h4> </div>
+                </div>
+                <div class="row">
+                    <div class="col"> <i>Adres</i> </div>
+                </div>
+                <div class="row">
+                    <div class="col"> <h4> @Html.DisplayFor(model => model.Address) </h4> </div>
+                </div>
+                <div class="row">
+                    <div class="col"> <i>Telefon kontaktowy</i> </div>
+                </div>
+                <div class="row">
+                    <div class="col"> 
+                        <h4>+48 @Html.DisplayFor(model => model.PhoneNumber).ToString().Insert(6, " ").Insert(3, " ")</h4> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"> <i>Lokalizacja</i> </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <iframe src="https://maps.google.com/maps?q=wroclaw&t=k&z=13&ie=UTF8&iwloc=&output=embed"
+                                frameborder="0" style="border:0" width="300"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

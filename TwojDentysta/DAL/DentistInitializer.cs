@@ -12,8 +12,9 @@ namespace TwojDentysta.DAL
         {
             var locations = new List<Location>
             {
-            new Location{Name="", ZipCode="12-345", City="Wrocław", Address="", PhoneNumber=516313212, Lat=0, Long=0},
-            new Location{Name="", ZipCode="54-321", City="Kraków", Address="", PhoneNumber=514032461, Lat=0, Long=0},
+                //szerokość geograficzna przed długością geograficzną
+            new Location{Name="Klinka we Wrocławiu", ZipCode="53-342", City="Wrocław", Address="Komandorska 53A/3b", PhoneNumber=516313212, Lat=17.028145298262693, Long=51.09747941434115},
+            new Location{Name="Klinka w Krakowie", ZipCode="31-526", City="Kraków", Address="Kielecka 1", PhoneNumber=514032461, Lat=19.96238509970554, Long=50.06903484977624},
             };
 
             locations.ForEach(s => context.Locations.Add(s));
