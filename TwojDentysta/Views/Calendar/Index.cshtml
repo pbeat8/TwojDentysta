@@ -1,0 +1,58 @@
+﻿@model TwojDentysta.Models.CalendarViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Terminarz wizyt w lokalizacji @Model.SelectedLocationName</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            <table class="table">
+                <tr>
+                    <th>Time</th>
+                </tr>
+                <tr><td>8:00</td></tr>
+                <tr><td>9:00</td></tr>
+                <tr><td>10:00</td></tr>
+                <tr><td>11:00</td></tr>
+                <tr><td>12:00</td></tr>
+                <tr><td>13:00</td></tr>
+                <tr><td>14:00</td></tr>
+                <tr><td>15:00</td></tr>
+                <tr><td>16:00</td></tr>
+                <tr><td>17:00</td></tr>
+                <tr><td>18:00</td></tr>
+            </table>
+        </div>
+        @{int i = 0;}
+        @foreach (var item in Model.Appointments)
+        {
+            <div class="col-sm-2">
+                <table class="table">
+                    <tr>
+                        <th style="background-color: dodgerblue">
+                            @(Model.Dates.ToList()[i].Date.DayOfWeek) @(Model.Dates.ToList()[i].ToString("dd.MM"))
+                        </th>
+                    </tr>
+                    @foreach (var appointment in item)
+                    {
+                        <tr>
+                            @if (appointment != null)
+                            {
+                            <td style="background-color: darkgrey">
+                                Free appointment
+                            </td>
+                            }
+                            else
+                            {
+                                <td>-</td>
+                            }
+                        </tr>
+                    }
+                </table>
+            </div>
+             i = i + 1;
+        }
+    </div>
+</div>

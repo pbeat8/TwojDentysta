@@ -17,7 +17,7 @@
                         <h2>@Html.DisplayFor(modelItem => item.Name)</h2> <br />
                         <img src="~/Images/@(item.ID).jpg" class="img-rounded img-thumbnail" alt="img-thumbnail" /> <br /> <br />
                         @Html.ActionLink("Informacje kontaktowe", "Details", new { id = item.ID }) <br /> <br />
-                        <a href='@Url.Action("Index", "Appointments")' class="btn btn-primary">Umów swoją wizytę</a>
+                        <a href='@Url.Action("Index", "Calendar",  new { locationID = item.ID })' class="btn btn-primary">Umów swoją wizytę</a>
                     }
                     col1 = col1 + 1;
                 }
@@ -30,7 +30,7 @@
                         <h2>@Html.DisplayFor(modelItem => item.Name)</h2> <br />
                         <img src="~/Images/@(item.ID).jpg" class="img-rounded img-thumbnail" alt="img-thumbnail" /> <br /> <br />
                         @Html.ActionLink("Informacje kontaktowe", "Details", new { id = item.ID }) <br /> <br />
-                        <a href='@Url.Action("Index", "Appointments")' class="btn btn-primary">Umów swoją wizytę</a>
+                        <a href='@Url.Action("Index", "Calendar",  new { locationID = item.ID })' class="btn btn-primary">Umów swoją wizytę</a>
 
                     }
                     col2 = col2 + 1;
