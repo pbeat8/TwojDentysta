@@ -16,6 +16,7 @@ namespace TwojDentysta.Controllers
         private DatabaseContext db = new DatabaseContext();
 
         // GET: Appointments
+        //[Authorize]
         public ActionResult Index()
         {
             var appointments = db.Appointments.Include(a => a.Location);
@@ -23,6 +24,7 @@ namespace TwojDentysta.Controllers
         }
 
         // GET: Appointments/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace TwojDentysta.Controllers
         }
 
         // GET: Appointments/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name");
@@ -49,6 +52,7 @@ namespace TwojDentysta.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,Date,PhysiciansID,LocationID,Booked,PatientFirstName,PatientLastName,PatientPhoneNumber,PatientEmail,Description")] Appointment appointment)
         {
             if (ModelState.IsValid)
@@ -63,6 +67,7 @@ namespace TwojDentysta.Controllers
         }
 
         // GET: Appointments/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +88,7 @@ namespace TwojDentysta.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,Date,PhysiciansID,LocationID,Booked,PatientFirstName,PatientLastName,PatientPhoneNumber,PatientEmail,Description")] Appointment appointment)
         {
             if (ModelState.IsValid)
@@ -96,6 +102,7 @@ namespace TwojDentysta.Controllers
         }
 
         // GET: Appointments/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,6 +120,7 @@ namespace TwojDentysta.Controllers
         // POST: Appointments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Appointment appointment = db.Appointments.Find(id);
