@@ -15,6 +15,38 @@ namespace TwojDentysta.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
 
+        public ActionResult PatientData(int id)
+        {
+            Appointment appointment = db.Appointments.Find(id);
+            if (appointment == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name", appointment.LocationID);
+            return View(appointment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PatientData([Bind(Include = "ID,Date,PhysiciansID,LocationID,Booked,PatientFirstName,PatientLastName,PatientPhoneNumber,PatientEmail,Description")] Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("ConfirmData", appointment);
+            }
+            ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name", appointment.LocationID);
+            return View(appointment);
+        }
+
+        public ActionResult ConfirmData(Appointment appointment)
+        {
+            Physician physician = db.Physicians.Find(appointment.PhysiciansID);
+            Location location = db.Locations.Find(appointment.LocationID);
+            ViewBag.Physician = physician.FirstName + " " + physician.LastName;
+            ViewBag.Location = location.City + ", " + location.Address;
+            return View(appointment);
+        }
+
         // GET: Appointments
         //[Authorize]
         public ActionResult Index()
@@ -24,7 +56,6 @@ namespace TwojDentysta.Controllers
         }
 
         // GET: Appointments/Details/5
-        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,7 +71,6 @@ namespace TwojDentysta.Controllers
         }
 
         // GET: Appointments/Create
-        [Authorize]
         public ActionResult Create()
         {
             ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name");
@@ -52,7 +82,6 @@ namespace TwojDentysta.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult Create([Bind(Include = "ID,Date,PhysiciansID,LocationID,Booked,PatientFirstName,PatientLastName,PatientPhoneNumber,PatientEmail,Description")] Appointment appointment)
         {
             if (ModelState.IsValid)
@@ -67,7 +96,6 @@ namespace TwojDentysta.Controllers
         }
 
         // GET: Appointments/Edit/5
-        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,7 +116,6 @@ namespace TwojDentysta.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,Date,PhysiciansID,LocationID,Booked,PatientFirstName,PatientLastName,PatientPhoneNumber,PatientEmail,Description")] Appointment appointment)
         {
             if (ModelState.IsValid)

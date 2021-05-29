@@ -41,7 +41,8 @@
                             @if (appointment != null)
                             {
                             <td style="background-color: darkgrey">
-                                Free appointment
+                                <a href='@Url.Action("PatientData", "Appointments",  new { id = appointment.ID })'
+                                   class="text-primary">Wolna wizyta</a>
                             </td>
                             }
                             else

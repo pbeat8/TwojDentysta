@@ -8,7 +8,7 @@ namespace TwojDentysta.DAL
     {
         public DatabaseContext() : base("DatabaseContext")
         {
-            //Database.SetInitializer(new DentistInitializer());
+            Database.SetInitializer(new DentistInitializer());
         }
 
         public DbSet<Location> Locations { get; set; }
