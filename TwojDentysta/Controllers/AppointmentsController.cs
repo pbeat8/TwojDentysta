@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TwojDentysta.DAL;
 using TwojDentysta.Models;
+using System.Globalization;
 
 namespace TwojDentysta.Controllers
 {
@@ -45,6 +46,28 @@ namespace TwojDentysta.Controllers
             ViewBag.Physician = physician.FirstName + " " + physician.LastName;
             ViewBag.Location = location.City + ", " + location.Address;
             return View(appointment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmedData([Bind(Include = "ID,Date,PhysiciansID,LocationID,Booked,PatientFirstName,PatientLastName,PatientPhoneNumber,PatientEmail,Description")] Appointment appointment)
+        {
+            //to mamy 06/23/2021 14:00:00
+            appointment.Date = DateTime.Parse(appointment.Date.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (ModelState.IsValid)
+            {
+                appointment.Booked = true;
+                db.Appointments.Add(appointment);
+                db.SaveChanges();
+                return View();
+            }
+
+            return View();
+        }
+
+        public ActionResult ConfirmedData()
+        {
+             return View();
         }
 
         // GET: Appointments

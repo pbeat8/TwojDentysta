@@ -6,7 +6,7 @@
 
 <h2>Potwierdź dane</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("ConfirmedData", "Appointments", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
